@@ -18,4 +18,6 @@ The following steps were undertaken to implement the Sidecar pattern for log shi
    
 
 5. Mounted the "shared-logs" volume on both containers at the location /var/log/nginx. This allowed both containers to read and write logs.
+![image1](./images/image11.png)
+![image1](./images/image12.png)
 
