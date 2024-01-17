@@ -12,15 +12,20 @@
      - Container 1 (`httpd-php-container`) using the image `webdevops/php-apache:alpine-3-php7`.
      - Container 2 (`mysql-container`) using the image `mysql:5.6`.
    - Mount the `php-config` ConfigMap in `httpd-php-container` at `/opt/docker/etc/php/php.ini`.
+ 
 
 3. **Create Kubernetes generic Secrets for MySQL**:
    - Include secret values for MySQL root password, user, password, host, and database.
+   
+
 
 4. **Add Environment Variables for both containers**:
    - For `httpd-php-container`, include environment variables: `MYSQL_ROOT_PASSWORD`, `MYSQL_DATABASE`, `MYSQL_USER`, `MYSQL_PASSWORD`, and `MYSQL_HOST`. Retrieve values from the created Secrets using `env` field.
+   
 
 5. **Create a NodePort type Service named lamp-service**:
    - Expose the web application on node port 30008.
+  
 
 6. **Create a Service for MySQL named mysql-service**:
    - Set the port to 3306.
@@ -39,6 +44,7 @@
 variables_order = "EGPCS"
 ```
 kubectl create configmap php-config --from-file=php.ini
+ ![image1](./images/lamp1.png)
 
 
 
@@ -135,7 +141,8 @@ spec:
          configMap:
            name: index-php
 ```
-
+  ![image1](./images/lamp2.png)
+   ![image1](./images/lamp3.png)
 
 
 ### 3. Created Secrets for MySQL (my-secret) using imperative method.
@@ -143,8 +150,8 @@ spec:
 ```yaml
 kubectl create secret generic my-secret --from-literal=MYSQL_ROOT_PASSWORD=password --from-literal=MYSQL_DATABASE=pius --from-literal=MYSQL_USER=udoka --from-literal=MYSQL_PASSWORD=udoka --from-literal=MYSQL_HOST=mysql-service
 ```
-
 Mysql_host should be the mysql service name. 
+![image1](./images/lamp4.png)
 
 ### 4. Service for lamp (lamp-service) and Service for MySQL (mysql-service):
 ```yaml
@@ -174,8 +181,11 @@ spec:
       port: 3306
       targetPort: 3306
 ```
-
+![image1](./images/lamp5.png) 
 
 
 ### TEST AND VALIDATE:
 Add the /tmp/index.php to configmap and edit the connection string so the application can use the right variable to connect to the database mysql. 
+
+ ![image1](./images/lamp6.png)
+  ![image1](./images/lamp7.png)
