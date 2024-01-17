@@ -40,8 +40,7 @@
 ## Solution:
 
 ### 1. Created ConfigMap for php.ini (php-configl), created file name php.ini and added the configuration to the file. 
-```
-variables_order = "EGPCS"
+```variables_order = "EGPCS"
 ```
 kubectl create configmap php-config --from-file=php.ini
  ![image1](./images/lamp1.png)
