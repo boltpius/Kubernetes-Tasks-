@@ -185,6 +185,7 @@ spec:
 
 ### TEST AND VALIDATE:
 Add the /tmp/index.php to configmap and edit the connection string so the application can use the right variable to connect to the database mysql. Note to access the values of the SECRETS which is base64 encoded use this command ``` kubectl get secrets my-secrets -o jsonpath='{.data}' ```
+ADDITIONAL NOTE; The applciation is able to connect to the databse with the help of the MYSQL_HOST, which is usually the name of the cluster Ip service 
 
  ![image1](./images/lamp6.png)
   ![image1](./images/lamp7.png)
